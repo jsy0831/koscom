@@ -4,6 +4,8 @@ class Animal
 {
 public:
 	int age;
+
+	virtual ~Animal() {}
 };
 class Dog : public Animal
 {
@@ -26,6 +28,8 @@ int main()
 	// => p가 가리키는 곳이 정말 Dog 인지 알수 없다. 무조건 캐스팅 성공
 	// => p가 가리키는 곳이 Dog 가 아니라도 성공하는데, 개발자 책임!!!
 //	Dog* pdog = static_cast<Dog*>(p);
+
+
 
 	// dynamic_cast : 실행시간 캐스팅
 	// => 실행시간에 p가 가리키는 곳이 Dog 인지 조사후 캐스팅
