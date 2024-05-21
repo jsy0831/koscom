@@ -22,7 +22,7 @@ public:
 			if (isdigit(c))
 			{
 				data.push_back(c);
-				std::cout << c << std::endl;
+				std::cout << c;
 			}
 		}
 		std::cout << '\n';
