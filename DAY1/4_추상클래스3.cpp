@@ -27,6 +27,12 @@ public:
 	void take() { std::cout << "Take HD Picture" << std::endl; }
 };
 
+class UHDCamera : public ICamera
+{
+public:
+	void take() { std::cout << "Take UHD Picture" << std::endl; }
+};
+
 int main()
 {
 	People p;
@@ -35,6 +41,10 @@ int main()
 
 	HDCamera hc;
 	p.use_camera(&hc); 
+
+	UHDCamera uhc;
+	p.use_camera(&uhc); // People 클래스를 수정하지 않고도
+					    // 새로운 제품을 사용할수 있다.
 
 }
 
