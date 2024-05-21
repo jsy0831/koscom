@@ -1,6 +1,13 @@
 #include <iostream>
 #include <vector>
 
+// 아래 코드는 OCP 를 만족하지 못하는 안좋은 코드 입니다
+// => 새로운 도형(Triangle) 이 추가되면
+// => main 함수의 cmd==9 안의 if 문이 한줄 추가되어야 합니다.
+// 
+// => 새로운 도형 추가할때마다 계속 변경
+// => dynamic_cast 는 나쁜 디자인과 연결됩니다. 사용하지 마세요
+
 
 class Shape
 {
