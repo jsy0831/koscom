@@ -34,9 +34,17 @@ int main()
 		{
 			for (auto p : v)
 			{
+				// C++17의 새로운 if 문
+				// 기존   if : if ( 조건식 )
+				// 새로운 if : if ( 초기화구문; 조건식 )
+				// vs 에서 C++17 사용하려면 프로젝트메뉴, 속성 메뉴에서 C++버전 변경
 				if ( Rect* r = dynamic_cast<Rect*>(p); r != nullptr )
 				{
 					r->draw();
+				}
+				else if (Circle* c = dynamic_cast<Circle*>(p); c != nullptr)
+				{
+					c->draw();
 				}
 
 			}
