@@ -63,12 +63,17 @@ public:
 	{
 		return s.size() < count && isdigit(c);
 	}
+	bool is_complete(const std::string& s) override
+	{
+		return s.size() == count;
+	}
 };
 int main()
 {
 	Edit e;
 	LimitDigitValidator v(5);
 	e.set_validator(&v);    // Edit 객체에 값의 유효성을 확인하는 객체 전달
+
 	while (1)
 	{
 		std::cout << e.get_data() << std::endl;
