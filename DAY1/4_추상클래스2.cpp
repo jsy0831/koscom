@@ -2,6 +2,16 @@
 #include <iostream>
 
 
+// OCP
+// => 기능확장에 열려 있고(Open, 나중에 새로운 클래스/모듈)이 추가되어도
+// => 코드수정에는 닫혀 있어야(Close, 기존 코드는 수정되지 않게)
+// => 디자인 하라는 원칙(Principle )
+
+// 개방 폐쇄 의 법칙(open close principle)
+
+// 객체지향 설계의 5대 원칙 : SRP, OCP, LSP, ISP, DIP  => SOLID
+
+
 class Camera
 {
 public:	
