@@ -39,7 +39,6 @@ int main()
 
 	std::cout << pdog << std::endl;
 
-
 }
 
 
