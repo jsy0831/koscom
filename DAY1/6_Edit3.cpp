@@ -52,9 +52,23 @@ public:
 	}
 };
 
+// 이제 다양한 Validation 정책을 제공하는 클래스들을 제공하면 됩니다.
+class LimitDigitValidator : public IValidator
+{
+	int count;
+public:
+	LimitDigitValidator(int c) : count(c) {}
+
+	bool validate(const std::string& s, char c) override
+	{
+		return s.size() < count && isdigit(c);
+	}
+};
 int main()
 {
 	Edit e;
+	LimitDigitValidator v(5);
+	e.set_validator(&v);    // Edit 객체에 값의 유효성을 확인하는 객체 전달
 	while (1)
 	{
 		std::cout << e.get_data() << std::endl;
