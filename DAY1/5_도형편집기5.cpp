@@ -54,6 +54,17 @@ int main()
 
 			// k번째 도형의 복사본을 만들어서 v에 추가.
 			// 어떻게 해야 할까요 ? k번째 도형이 어떤 도형일 까요 ?
+
+			// 아래 처럼하면 역시 OCP 를 만족할수 없습니다!!
+			// 나쁜 코드!!
+			if (Rect* r = dynamic_cast<Rect*>(v[k]); r != nullptr)
+			{
+				v.push_back(new Rect(*r));
+			}
+			else if (Circle* c = dynamic_cast<Circle*>(v[k]); c != nullptr)
+			{
+				v.push_back(new Rect(*c));
+			}
 		}
 	}
 }
