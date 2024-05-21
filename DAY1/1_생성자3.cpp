@@ -1,6 +1,6 @@
 // protected 생성자의 의도 
 // => 자신은 객체를 만들수 없지만(추상적 존재. abstract)
-// => 파생 클래스는 객체를 만들수 있다(구체적 존재. concret)
+// => 파생 클래스는 객체를 만들수 있다(구체적 존재. concrete)
 
 class Animal
 {
