@@ -9,7 +9,7 @@
 // => java 의 stack 이 vector로 부터 상속 되어서 구현 - 나쁜 디자인의 대표적 예!!
 
 // 아래 처럼 포함을 사용한 adapter 가 훨씬 좋은 디자인!
-template<typename T> class stack 
+template<typename T> 
 class stack
 {
 	std::list<T> c;
@@ -23,5 +23,6 @@ int main()
 	stack<int> s;
 	s.push(10);
 
-	s.push_front(20); // ???
+
+//	s.push_front(20); // ???
 }
