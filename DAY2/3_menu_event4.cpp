@@ -54,9 +54,9 @@ public:
 			{
 				std::cout << i + 1 << ". " << v[i]->get_title() << "\n";
 			}
-			std::cout << sz + 1 << ". ì¢…ë£Œ\n";
+			std::cout << sz + 1 << ". Á¾·á\n";
 
-			std::cout << "ë©”ë‰´ë¥¼ ì„ íƒí•˜ì„¸ìš” >> ";
+			std::cout << "¸Ş´º¸¦ ¼±ÅÃÇÏ¼¼¿ä >> ";
 			int cmd;
 			std::cin >> cmd;
 
@@ -78,7 +78,7 @@ class MenuItem : public BaseMenu
 {
 	using HANDLER = std::function<void()>; 
 
-	std::vector<HANDLER> handler_vector; // ë©”ë‰´ ì„ íƒì‹œ ì—¬ëŸ¬ê³³ì— ì•Œë ¤ì£¼ê¸°ìœ„í•´
+	std::vector<HANDLER> handler_vector; // ¸Ş´º ¼±ÅÃ½Ã ¿©·¯°÷¿¡ ¾Ë·ÁÁÖ±âÀ§ÇØ
 
 	int id;
 public:
@@ -94,7 +94,7 @@ public:
 
 	void command()
 	{
-		// ë©”ë‰´ ì„ íƒì‹œ ë“±ë¡ëœ ëª¨ë“  í•¨ìˆ˜ë¥¼ í˜¸ì¶œ
+		// ¸Ş´º ¼±ÅÃ½Ã µî·ÏµÈ ¸ğµç ÇÔ¼ö¸¦ È£Ãâ
 		for (auto f : handler_vector)
 			f();
 	}
@@ -102,20 +102,20 @@ public:
 
 void new_file() 
 { 
-	std::cout << "ìƒˆíŒŒì¼ ì‘ì—…\n"; 
+	std::cout << "»õÆÄÀÏ ÀÛ¾÷\n"; 
 	_getch();
 }
 void work(int id)
 {
-	std::cout << "ë‹¤ì–‘í•œ ì‘ì—… : " << id << std::endl;
+	std::cout << "´Ù¾çÇÑ ÀÛ¾÷ : " << id << std::endl;
 	_getch();
 }
 
 int main()
 {	
 	PopupMenu* root = new PopupMenu("ROOT");
-	root->add( new MenuItem("ìƒˆíŒŒì¼", 11, &new_file ) );
-	root->add( new MenuItem("í™”ë©´ì§€ìš°ê¸°", 12, std::bind(&work, 11) ));
+	root->add( new MenuItem("»õÆÄÀÏ", 11, &new_file ) );
+	root->add( new MenuItem("È­¸éÁö¿ì±â", 12, std::bind(&work, 11) ));
 	root->command();
 }
 
