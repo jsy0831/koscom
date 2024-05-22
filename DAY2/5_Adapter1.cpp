@@ -1,0 +1,66 @@
+#include <iostream>
+#include <string>
+#include <vector>
+
+// 아래 클래스가 이미 있었다가 가정해 봅시다.
+
+// 문자열을 보관하고 있다가 화면에 이쁘게 출력하는 기능.
+class TextView
+{
+	// font name, font size, color 등 다양한 정보를 관리하는 기능
+	std::string data;
+public:
+	TextView(const std::string& s) : data(s) {}
+
+	void show() { std::cout << data << std::endl; }
+};
+
+//===============================================
+
+class Shape
+{
+public:
+	virtual void draw() = 0;
+	virtual ~Shape() {}
+};
+
+class Rect : public Shape
+{
+public:
+	void draw() override { std::cout << "draw rect" << std::endl; }
+};
+class Circle : public Shape
+{
+public:
+	void draw() override { std::cout << "draw circle" << std::endl; }
+};
+
+// 도형편집기에서 문자열도 다루고 싶다.
+
+// TextView 인터페이스(함수이름)을 변경해서 도형 편집기에서 사용할수 있게
+// 하는 클래스
+
+class Text : public Shape, public TextView
+{
+public:
+	Text(const std::string& data) : TextView(data) {}
+
+	void draw()
+	{
+		? ;
+	}
+};
+
+
+
+int main()
+{
+	std::vector<Shape*> v;
+}
+
+
+
+
+
+
+
