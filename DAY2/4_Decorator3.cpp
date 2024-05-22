@@ -1,17 +1,24 @@
-//  구글에서 "C# stream" 검색후 image 보기로 해보세요
-
-// Decorator - 65 page
 #include <iostream>
 #include <string>
 
-// 인터넷에서 그림을 download 해서 화면에 그리는 함수
-class Picture
+
+// Picture 와 Picture 에 기능을 추가하는 클래스(Decorator)는
+// 공통의 인터페이스가 필요 하다.
+// => 모두 그릴수 있다.
+
+struct IDraw
+{
+	virtual void draw() = 0;
+	virtual ~IDraw() {}
+};
+
+
+class Picture : public IDraw 
 {
 	std::string url;
 public:
 	Picture(const std::string& url) : url(url)
 	{
-		// 인터넷에서 그림을 download 하는 코드.
 	}
 	void draw() { std::cout << "draw " << url << std::endl; }
 };
@@ -19,12 +26,12 @@ public:
 //---------------------------------------------------
 // 포함을 사용한 기능의 추가
 
-class Frame
+class Frame : public IDraw
 {
-	Picture* pic;	
+	IDraw* pic;
 
 public:
-	Frame(Picture* pic) : pic(pic) {}
+	Frame(IDraw* pic) : pic(pic) {}
 
 	void draw()
 	{
@@ -34,11 +41,11 @@ public:
 	}
 };
 // 꽃그림을 추가하는 객체(Decorator)
-class Flower
+class Flower : public IDraw
 {
-	Picture* pic;
+	IDraw* pic;
 public:
-	Flower(Picture* pic) : pic(pic) {}
+	Flower(IDraw* pic) : pic(pic) {}
 
 	void draw()
 	{
@@ -54,8 +61,8 @@ int main()
 	Picture pic("www.naver.com/a.png");
 
 	Frame frame(&pic); 
-	frame.draw();
+//	frame.draw();
 
-	Flower flower(&pic);
+	Flower flower(&frame);
 	flower.draw();
 }
