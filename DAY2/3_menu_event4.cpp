@@ -99,11 +99,23 @@ public:
 			f();
 	}
 };
+
+void new_file() 
+{ 
+	std::cout << "새파일 작업\n"; 
+	_getch();
+}
+void work(int id)
+{
+	std::cout << "다양한 작업 : " << id << std::endl;
+	_getch();
+}
+
 int main()
 {	
 	PopupMenu* root = new PopupMenu("ROOT");
-	root->add( new MenuItem("새파일", 11 ) );
-	root->add( new MenuItem("화면지우기", 12) );
+	root->add( new MenuItem("새파일", 11, &new_file ) );
+	root->add( new MenuItem("화면지우기", 12, std::bind(&work, 11) ));
 	root->command();
 }
 
