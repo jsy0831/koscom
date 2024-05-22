@@ -39,6 +39,9 @@ public:
 // TextView 인터페이스(함수이름)을 변경해서 도형 편집기에서 사용할수 있게
 // 하는 클래스
 
+// Adapter : 기존의 존재하던 클래스의 인터페이스를 요구조건에 맞도록 수정하는 클래스
+//			"인터페이스의 불일치를 해결하는 패턴"
+
 class Text : public Shape, public TextView
 {
 public:
