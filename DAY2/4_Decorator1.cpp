@@ -17,7 +17,8 @@ public:
 };
 // 스티커 사진 처럼 다운로드한 그림에 다양한 이모티콘을 추가하고 싶다.
 
-// 상속을 통한 기능의 추가
+// 상속을 통한 기능의 추가 : 객체가 아닌 클래스에 기능을 추가한 것!
+// 
 class Frame : public Picture
 {
 public:
@@ -33,7 +34,7 @@ public:
 
 int main()
 {
-	Picture pic("www.naver.com/a.png");
+	Picture pic("www.naver.com/a.png");	// 이순간 그림은 download 되었다.
 	pic.draw();
 
 	Frame frame("www.naver.com/a.png");
