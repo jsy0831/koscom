@@ -36,7 +36,6 @@ public:
 };
 
 // 도형편집기에서 문자열도 다루고 싶다.
-
 // TextView 인터페이스(함수이름)을 변경해서 도형 편집기에서 사용할수 있게
 // 하는 클래스
 
@@ -45,17 +44,19 @@ class Text : public Shape, public TextView
 public:
 	Text(const std::string& data) : TextView(data) {}
 
+	// 아래 코드가 "show" 라는 인터페이스(함수이름)을 "draw" 로 변경해서
+	// 도형편집기의 요구조건을 만족하도록 만든것.
 	void draw()
 	{
-		? ;
+		show();
 	}
 };
-
-
-
 int main()
 {
 	std::vector<Shape*> v;
+
+	v.push_back(new Text("Hello"));
+	v[0]->draw();
 }
 
 
