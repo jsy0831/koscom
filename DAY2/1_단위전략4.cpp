@@ -1,5 +1,11 @@
 // 방법 #3. Policy Base Design
 
+// vector 같은 클래스가 사용하는 어떤 정책(메모리 할당 방법)
+// => 별도의 클래스로 만들어서
+// => template 인자로 교체 할수 있도록 하는 디자인
+
+// strategy 패턴      : 정책 클래스를 인터페이스로 교체
+// policy base 디자인 : 정책 클래스를 template 인자로 교체
 
 template<typename T,      // 저장할 요소의 타입
 	     typename Alloc>  // 메모리 할당기
