@@ -28,20 +28,7 @@ public:
 
 
 
-class MenuItem : public BaseMenu
-{
-	int id;
-public:
-	MenuItem(const std::string& title, int id)
-		: BaseMenu(title), id(id) {}
 
-	void command()
-	{
-		std::cout << get_title() << " 메뉴가 선택됨\n";
-
-		_getch();
-	}
-};
 
 class PopupMenu : public BaseMenu
 {
@@ -80,26 +67,27 @@ public:
 		}
 	}
 
-	BaseMenu* get_menu(int idx) { return v[idx]; }
+ 	BaseMenu* get_menu(int idx) { return v[idx]; }
 };
 
+class MenuItem : public BaseMenu
+{
+	int id;
+public:
+	MenuItem(const std::string& title, int id)
+		: BaseMenu(title), id(id) {}
+
+	void command()
+	{
+		std::cout << get_title() << " 메뉴가 선택됨\n";
+		_getch();
+	}
+};
 int main()
 {	
 	PopupMenu* root = new PopupMenu("ROOT");
-	PopupMenu* pm1 = new PopupMenu("해상도 변경");
-	PopupMenu* pm2 = new PopupMenu("색상 변경");
-
-	root->add(pm1);
-	root->add(pm2);
-
-	pm1->add(new MenuItem("HD", 11));
-	pm1->add(new MenuItem("FHD", 12));
-
-
-	pm2->add(new MenuItem("RED", 21));
-	pm2->add(new MenuItem("GREEN", 22));
-
-	// 이제 시작하려면 ?
+	root->add(new MenuItem("새파일", 11 ) );
+	root->add(new MenuItem("화면지우기", 12) );
 	root->command();
 }
 
