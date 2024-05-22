@@ -1,7 +1,7 @@
 #include <iostream>
 #include <algorithm>
 #include <functional>
-
+using namespace std::placeholders; // _1, _2 를 사용하기 위해
 // 4항 함수
 void foo( int a, int b, int c, int d)
 {
@@ -23,6 +23,6 @@ int main()
 
     auto f2 = std::bind(&foo, 3, _1, 7, _2);
 
-    f2(8, 4);
+    f2(8, 4); // foo( 3, 8, 7, 4) 즉, 4항 함수 => 2항 함수로 변경해서 사용
 }
 
