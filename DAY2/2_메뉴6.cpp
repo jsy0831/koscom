@@ -3,6 +3,9 @@
 #include <vector>
 #include <conio.h> 
 
+// 예외를 위한 클래스
+class UnsupportedOperation {};
+
 
 class BaseMenu
 {
@@ -16,7 +19,20 @@ public:
 
 	virtual void command() = 0;
 
+
+	// 아래 멤버 함수들은 PopupMenu 에서만 필요하고
+	// MenuItem 에서는 필요 없습니다.
+	// 하지만 BaseMenu 에서 함수 선언을 제공하면 사용자가 편리하게 사용가능합니다.
+	// 기본 구현은 "예외 전달" 기술로 구현하는 경우가 많습니다.
+	virtual void add(BaseMenu*) { throw UnsupportedOperation(); }
+	virtual BaseMenu* get_menu(int idx) { throw UnsupportedOperation(); }
+
 };
+
+
+
+
+
 
 class MenuItem : public BaseMenu
 {
@@ -73,8 +89,9 @@ public:
 
 
 	}
-};
 
+	BaseMenu* get_menu(int idx) { return v[idx]; }
+};
 
 int main()
 {
