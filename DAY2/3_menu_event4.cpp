@@ -1,7 +1,11 @@
+
 #include <iostream>
 #include <string>
 #include <vector>
 #include <conio.h> 
+#include <functional>
+using namespace std::placeholders;
+
 
 class UnsupportedOperation {};
 
@@ -72,22 +76,34 @@ public:
 
 class MenuItem : public BaseMenu
 {
+	using HANDLER = std::function<void()>; 
+
+	std::vector<HANDLER> handler_vector; // 메뉴 선택시 여러곳에 알려주기위해
+
 	int id;
 public:
-	MenuItem(const std::string& title, int id)
-		: BaseMenu(title), id(id) {}
+	MenuItem(const std::string& title, int id, HANDLER h = nullptr)
+		: BaseMenu(title), id(id) 
+	{
+		if (h != nullptr)
+			handler_vector.push_back(h);
+	}
+
+	void add_handlder(HANDLER h) { handler_vector.push_back(h); }
+
 
 	void command()
 	{
-		std::cout << get_title() << " 메뉴가 선택됨\n";
-		_getch();
+		// 메뉴 선택시 등록된 모든 함수를 호출
+		for (auto f : handler_vector)
+			f();
 	}
 };
 int main()
 {	
 	PopupMenu* root = new PopupMenu("ROOT");
-	root->add(new MenuItem("새파일", 11 ) );
-	root->add(new MenuItem("화면지우기", 12) );
+	root->add( new MenuItem("새파일", 11 ) );
+	root->add( new MenuItem("화면지우기", 12) );
 	root->command();
 }
 
