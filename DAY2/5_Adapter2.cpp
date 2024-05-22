@@ -54,7 +54,8 @@ class ObjectAdapter : public Shape
 public:
 	ObjectAdapter(TextView* v) : tview(v) {}
 
-	void draw() {}
+	// 아래 코드가 기존 "객체" 의 인터페이스를 변경한것
+	void draw() { tview->show();  }
 };
 
 int main()
@@ -67,6 +68,7 @@ int main()
 	// 이미 생성된 객체 tv 를 v에 넣을수 있을까 ?
 //	v.push_back(&tv);	// error
 	v.push_back( new ObjectAdapter(&tv) );	// ok
+	v[0]->draw(); // ObjectAdapter 를 통해서 tv->show() 호출
 }
 
 
