@@ -3,14 +3,28 @@
 #include <vector>
 #include <conio.h> 
 
-class MenuItem
+// Folder 는 File 을 보관하지만 Folder 도 보관한다.
+// => Folder 와 File 을 같이 보관해야 한다 - 공통의 기반 클래스 필요
+
+// PopupMenu 는 MenuItem 을 보관하지만 PopupMenu 자신도 보관 가능
+// => 공통의 기반 클래스 필요
+
+class BaseMenu
 {
 	std::string title;
-	int id;
 public:
-	MenuItem(const std::string& title, int id) : title(title), id(id) {}
+	BaseMenu(const std::string& title) : title(title) {}
+	virtual ~BaseMenu() {}
 
 	std::string get_title() const { return title; }
+};
+
+class MenuItem : public BaseMenu
+{
+	int id;
+public:
+	MenuItem(const std::string& title, int id) 
+		: BaseMenu(title), id(id) {}
 
 	void command()
 	{
@@ -20,14 +34,13 @@ public:
 	}
 };
 
-class PopupMenu
+class PopupMenu : public BaseMenu
 {
-	std::string title;
-	std::vector<MenuItem*> v;
+	std::vector<BaseMenu*> v;
 public:
-	PopupMenu(const std::string& title) : title(title) {}
+	PopupMenu(const std::string& title) : BaseMenu(title) {}
 
-	void add(MenuItem* m) { v.push_back(m); }
+	void add(BaseMenu* m) { v.push_back(m); }
 
 	void command()
 	{
@@ -70,12 +83,10 @@ int main()
 	MenuItem m2("소고기 김밥", 12);
 	MenuItem m9("라면",        21);
 
-
 	PopupMenu kimbab("김밥류");
 	kimbab.add(&m1);
 	kimbab.add(&m2);
-
-		
+			
 	PopupMenu pm("오늘의 점심 메뉴");
 	pm.add(&kimbab); // ?? 핵심. 잘 생각해 보세요
 	pm.add(&m9);
