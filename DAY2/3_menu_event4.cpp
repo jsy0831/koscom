@@ -1,4 +1,3 @@
-// menu_event4.cpp  => 기존 코드 지우고, 메뉴6.cpp 복사
 #include <iostream>
 #include <string>
 #include <vector>
@@ -79,26 +78,29 @@ public:
 
 			v[cmd - 1]->command();
 		}
-
-
 	}
 
 	BaseMenu* get_menu(int idx) { return v[idx]; }
 };
 
 int main()
-{
+{	
 	PopupMenu* root = new PopupMenu("ROOT");
 	PopupMenu* pm1 = new PopupMenu("해상도 변경");
+	PopupMenu* pm2 = new PopupMenu("색상 변경");
 
 	root->add(pm1);
+	root->add(pm2);
 
-	pm1->add(new MenuItem("HD",  11));
+	pm1->add(new MenuItem("HD", 11));
 	pm1->add(new MenuItem("FHD", 12));
 
 
-	root->command();
+	pm2->add(new MenuItem("RED", 21));
+	pm2->add(new MenuItem("GREEN", 22));
 
+	// 이제 시작하려면 ?
+	root->command();
 }
 
 
