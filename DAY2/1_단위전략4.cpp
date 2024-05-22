@@ -8,7 +8,7 @@
 // policy base 디자인 : 정책 클래스를 template 인자로 교체
 
 template<typename T,      // 저장할 요소의 타입
-	     typename Alloc>  // 메모리 할당기
+	     typename Alloc = std::allocator<T> >  // 메모리 할당기
 class vector
 {
 	T* buff;
