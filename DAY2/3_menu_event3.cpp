@@ -49,12 +49,13 @@ int main()
 	nc.addObserver("DISCONNECT_WIFI", 
 					[](void* p) { std::cout << "lambda\n"; });
 
-
-
 	// 배터리 모듈쪽에서 배터리가 부족해지면
 	nc.postNotificationWithName("LOWBATTERY", (void*)30);
 }
 
-
+// 중재자 패턴(Mediator)
+// => 객체간이 상호 관계가 복잡하면 중재자를 도입해라
+// => 객체간의 M:N 관계를 중재자와 객체간의 1:N 의 관계로 변경
+// => 위 통보 센터가 결국 중재자 역활을 하게 됩니다.
 
 
