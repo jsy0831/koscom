@@ -31,9 +31,11 @@ public:
 	}
 };
 
-
 int main()
 {
 	Picture pic("www.naver.com/a.png");
 	pic.draw();
+
+	Frame frame("www.naver.com/a.png");
+	frame.draw();
 }
