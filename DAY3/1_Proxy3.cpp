@@ -27,7 +27,7 @@ int main()
 	// 인터페이스를 사용해야 교체 가능한 설계가 됩니다.
 //	Calc* calc = new Calc;
 
-	ICalc* calc = new ??;
+	ICalc* calc = new ??; // ?? 를 어떻게 해야 할까요 ?? 다음 소스에서 해결.. 
 
 
 	int n1 = calc->Add(10, 20);
