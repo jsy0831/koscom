@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <map>
+#include "Helper.h" // 2교시에 만든 헤더. git  에 있습니다.
 
 // SRP : Single Responsibility Principle
 // => 하나의 클래스는 하나의 책임만 
@@ -24,6 +25,8 @@ public:
 // Image 객체를 생성/공유 하는 기능을 제공하는 클래스
 class ImageFactory
 {
+	MAKE_SINGLETON(ImageFactory)
+
 	std::map<std::string, Image*> image_map;
 public:
 	Image* Create(const std::string& url)
@@ -53,7 +56,8 @@ public:
 
 int main()
 {
-	ImageFactory factory;
+	ImageFactory& factory = ImageFactory::get_instance();
+
 
 	Image* img1 = factory.Create("www.naver.com/a.png");
 	img1->Draw();
