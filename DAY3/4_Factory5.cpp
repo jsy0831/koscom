@@ -59,6 +59,17 @@ public:
 
 		return p;
 	}
+
+	void show_sample()
+	{
+		std::cout << "공장에 등록된 견본 제품 목록\n";
+		// map은 pair 를 보관합니다.
+		// pair 는 first, second 로 접근합니다.
+		for (auto& p : prototype_map)
+		{
+			std::cout << p.first << ". " << p.second->draw() << std::endl;
+		}
+	}
 };
 
 
@@ -87,6 +98,7 @@ int main()
 	factory.register_shape(2, redRect);
 	factory.register_shape(3, redCircle);
 
+	factory.show_sample();
 
 
 
