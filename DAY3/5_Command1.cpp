@@ -30,12 +30,20 @@ struct ICommand
 {
 	virtual void execute() = 0;
 	virtual void can_execute() { return true;  }
-
 	virtual void undo() {}
 	virtual bool can_undo() { return false; }
 	virtual ~ICommand() {}
 };
 
+// 사각형을 추가하는 명령
+class AddRectCommand : public ICommand
+{
+	std::vector<Shape*>& v;
+public:
+	AddRectCommand(std::vector<Shape*>& v) : v(v) {}
+
+	void execute() override {  }	
+};
 
 
 
