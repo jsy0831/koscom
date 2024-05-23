@@ -47,7 +47,7 @@ public:
 };
 
 // 전역변수의 생성자는 언제 호출되는지 생각해 보세요 
-AutoRegister ar(1, &Rect::create); 
+//AutoRegister ar(1, &Rect::create); 
 
 
 
@@ -59,9 +59,25 @@ class Rect : public Shape
 public:
 	void draw() override { std::cout << "draw Rect" << std::endl; }
 
-
 	static Shape* create() { return new Rect; }
+
+
+	// static 멤버 데이타의 특징을 생각해 보세요
+	// => Rect 객체가 없어도 메모리 존재 합니다. (전역변수와 동일)
+	// => 즉, ar 의 생성자는 main 함수 이전에 호출되었습니다.
+	// => 공장에 Rect 가 이미 등록됨
+	static AutoRegister ar;
 };
+AutoRegister Rect::ar(1, &Rect::create);
+
+		    // Rect::ar 생성자는 main 함수 이전에 호출됨
+//Rect r1; // 생성자 호출
+//Rect r2; // 생성자 호출
+//Rect r3; // 생성자 호출.. 즉, 생성자는 객체당 한번 호출.
+
+
+
+
 
 
 
@@ -71,12 +87,10 @@ public:
 	void draw() override { std::cout << "draw Circle" << std::endl; }
 
 	static Shape* create() { return new Circle; }
+
+	static AutoRegister ar;
 };
-
-
-
-
-
+AutoRegister Circle::ar(2, &Circle::create);
 
 
 
@@ -85,13 +99,6 @@ int main()
 	std::vector<Shape*> v;
 
 	ShapeFactory& factory = ShapeFactory::get_instance();
-
-
-	factory.register_shape(1, &Rect::create);
-	factory.register_shape(2, &Circle::create);
-
-
-
 
 	while (1)
 	{
