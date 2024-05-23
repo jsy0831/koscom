@@ -4,15 +4,18 @@
 
 int main()
 {
-	ICalc* calc = get_proxy(); // 이순간 최종적으로는 
-	// DLL 내부의 CreateProxy() 가 호출되고
-	// "new Calc" 로 객체를 만들게 됩니다.
-	// delete 가 필요 하지 않을까요 ??
+	ICalc* calc1 = get_proxy(); // 규칙 1. proxy 객체를 얻으면 
+	calc1->AddRef();			//			참조계수 증가
 
-	int n1 = calc->Add(10, 20);
-	int n2 = calc->Sub(10, 20);
+	ICalc* calc2 = calc1;		// 규칙 2. 또다른 포인터로 가리키게되면
+	calc2->AddRef();			//			참조계수 증가
 
-	delete calc; // 이렇게 해도 될까요?
+	// 규칙 3. 더이상 사용하지 않으면 참조계수 감소
+	calc1->Release();
+
+	std::cout << "================\n";
+	calc2->Release();
+	std::cout << "================\n";
 }
 
 
