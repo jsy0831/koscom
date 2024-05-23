@@ -29,7 +29,7 @@ public:
 struct ICommand
 {
 	virtual void execute() = 0;
-	virtual void can_execute() { return true;  }
+	virtual bool can_execute() { return true;  }
 	virtual void undo() {}
 	virtual bool can_undo() { return false; }
 	virtual ~ICommand() {}
@@ -132,7 +132,7 @@ int main()
 		}
 		else if (cmd == 9)
 		{
-			pcmd = new AddDrawCommand(v);
+			pcmd = new DrawCommand(v);
 
 			if (pcmd->can_execute())
 			{
