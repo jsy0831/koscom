@@ -10,25 +10,18 @@ class Shape
 public:
 	virtual void draw() = 0;
 	virtual ~Shape() {}
+
+	virtual Shape* clone() = 0;
 };
 
 class Rect : public Shape
 {
 public:
 	void draw() override { std::cout << "draw Rect" << std::endl; }
-
-
 	static Shape* create() { return new Rect; }
+
+	virtual Rect* clone() { return new Rect(*this); }
 };
-
-
-
-
-
-
-
-
-
 
 
 class Circle : public Shape
@@ -37,6 +30,8 @@ public:
 	void draw() override { std::cout << "draw Circle" << std::endl; }
 
 	static Shape* create() { return new Circle; }
+
+	virtual Circle* clone() { return new Circle(*this); }
 };
 
 
@@ -45,23 +40,22 @@ class ShapeFactory
 {
 	MAKE_SINGLETON(ShapeFactory)
 
-		using CREATOR = Shape * (*)(); 
-	std::map<int, CREATOR> create_map; 
+	std::map<int, Shape*> prototype_map; // 견본을 보관하는 map
 
 public:
-	void register_shape(int type, CREATOR f)
+	void register_shape(int type, Shape* sample)
 	{
-		create_map[type] = f;
+		prototype_map[type] = sample;
 	}
 
 	Shape* Create(int type)
 	{
 		Shape* p = nullptr;
 
-		CREATOR f = create_map[type];
+		Shape* sample = prototype_map[type];
 
-		if (f != nullptr)
-			p = f();		
+		if (sample != nullptr)
+			p = sample->clone(); // 복사본을 만드는 가상함수 호출
 
 		return p;
 	}
@@ -78,8 +72,20 @@ int main()
 	ShapeFactory& factory = ShapeFactory::get_instance();
 
 	
-	factory.register_shape(1, &Rect::create);
-	factory.register_shape(2, &Circle::create);
+	// 아래 코드는 공장에 (1) 객체   (2) 클래스   를 등록하는 코드
+	// => 객체를 만드는 함수 포인터를 등록하므로 "클래스" 를 등록하는 의미
+//	factory.register_shape(1, &Rect::create);
+//	factory.register_shape(2, &Circle::create);
+
+
+	// 자주 사용되는 객체를 미리 만들어서 공장에 등록해 봅시다.
+	Rect* blueRect = new Rect; 
+	Rect* redRect = new Rect;
+	Circle* redCircle = new Circle;
+
+	factory.register_shape(1, blueRect);
+	factory.register_shape(2, redRect);
+	factory.register_shape(3, redCircle);
 
 
 
