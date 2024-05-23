@@ -54,11 +54,11 @@ public:
 
 
 
-#define REGISTER(classname)									\
-	static Shape* create() { return new classname; }		\
+#define REGISTER(classname)								\
+static Shape* create() { return new classname; }		\
 	static AutoRegister ar;
 
-#define REGISTER_IMP(type, classname)						\	
+#define REGISTER_IMP(type, classname)						\
 AutoRegister classname::ar(type, &classname::create);
 
 
