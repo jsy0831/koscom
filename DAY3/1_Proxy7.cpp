@@ -9,19 +9,20 @@ class sp
 {
 	T* obj;
 public:
-	sp(T* p) : obj(p) {}
-	sp(const sp& other) : obj(other.obj) {}
-	~sp() {}
+	sp(T* p) : obj(p) { if (obj != nullptr) obj->AddRef(); }
+	sp(const sp& other) : obj(other.obj) { if (obj != nullptr) obj->AddRef(); }
+	~sp() { if (obj != nullptr) obj->Release(); }
 
 	T* operator->() { return obj; }
 	T& operator*()  { return *obj; }
 };
 int main()
 {
-	sp<ICalc> calc1 = get_proxy();
+	// 아래 처럼사용하게된다면.. 쉽지 않을까요 ??
+	sp<ICalc> calc1 = get_proxy(); // sp<ICalc> calc1( get_proxy() );
 	sp<ICalc> calc2 = calc1;
 
-	int n = calc1->Add(10, 20);
+	int n = calc1->Add(10, 20); // (calc1.operator->()) -> Add(10, 20) 의 원리
 }
 
 
