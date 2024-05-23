@@ -1,7 +1,7 @@
 // Helper.h
 #pragma once
 
-#define MAKE_SINGLETON(classname)						\	
+#define MAKE_SINGLETON(classname)						\
 private:												\
 	classname() {}										\
 	classname(const classname&) = delete;				\
