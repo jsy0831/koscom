@@ -145,6 +145,24 @@ int main()
 				std::cout << "현재상태에서는 실행할수 없는 명령(disable menu)\n";
 			}
 		}
+
+		if (cmd == 0)
+		{
+			if (undo_stack.empty() == false)
+			{
+				pcmd = undo_stack.top();
+				undo_stack.pop();
+
+				if (pcmd->can_undo())
+				{
+					pcmd->undo();
+
+					// delete pcmd;  // redo 를 지원하지 않는 경우는 삭제..!!
+
+					redo_stack.push(pcmd); // redo 를 지원하려면 다시 보관.
+				}
+			}
+		}
 	}
 }
 
