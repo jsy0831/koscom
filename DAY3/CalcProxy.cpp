@@ -22,3 +22,13 @@ ICalc* CreateProxy()
 {
 	return new Calc;
 }
+
+// 리눅스환경의 C++ 컴파일러이름 : "gcc, g++"
+// 윈도우 환경우 MS가제공하는 C++ 컴파일러 : "cl.exe"
+
+// CalcProxy.cpp 소스가 있는 곳으로 이동후
+
+// cl CalcProxy.cpp /LD  /link user32.lib gdi32.lib kernel32.lib  
+// 
+// => /LD : DLL 로 빌드하라는 옵션
+// => /link 이하는 IPC 기술 때문에 필요
