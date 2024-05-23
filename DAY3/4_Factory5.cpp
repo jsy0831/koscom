@@ -67,7 +67,9 @@ public:
 		// pair 는 first, second 로 접근합니다.
 		for (auto& p : prototype_map)
 		{
-			std::cout << p.first << ". " << p.second->draw() << std::endl;
+			std::cout << p.first << ". ";
+
+			p.second->draw();
 		}
 	}
 };
