@@ -6,6 +6,8 @@
 // ICalc.h       : 인터페이스가 있는 헤더
 // CalcProxy.dll  
 
+#include "ICalc.h"
+
 ICalc* get_proxy()
 {
 	// 1. DLL load
