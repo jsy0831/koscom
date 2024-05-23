@@ -42,17 +42,65 @@ class AddRectCommand : public ICommand
 public:
 	AddRectCommand(std::vector<Shape*>& v) : v(v) {}
 
-	void execute() override {  }	
+	void execute() override { v.push_back(new Rect); }
+	bool can_undo() override { return true; }
+	void undo()  override 
+	{
+		Shape* s = v.back(); // 꺼내기만 하고 제거 안되므로
+		v.pop_back();		 // 별도로 제거
+
+		delete s;
+	}
 };
 
+class AddCircleCommand : public ICommand
+{
+	std::vector<Shape*>& v;
+public:
+	AddCircleCommand(std::vector<Shape*>& v) : v(v) {}
 
+	void execute() override { v.push_back(new Circle); }
 
+	bool can_undo() override { return true; }
+	void undo()  override
+	{
+		Shape* s = v.back(); 
+		v.pop_back();		
+
+		delete s;
+	}
+};
+
+class DrawCommand : public ICommand
+{
+	std::vector<Shape*>& v;
+public:
+	DrawCommand(std::vector<Shape*>& v) : v(v) {}
+
+	void execute() override 
+	{ 
+		for (auto s : v) 
+			s->draw();
+	}
+
+	bool can_undo() override { return true; }
+	
+	void undo()  override  { system("cls");	}
+
+	bool can_execute() override { return !v.empty(); }
+};
 
 
 
 int main()
 {
 	std::vector<Shape*> v;
+
+	ICommand* pcmd = nullptr;
+
+	std::stack<ICommand*> undo_stack;
+	std::stack<ICommand*> redo_stack;
+
 
 	while (1)
 	{
@@ -61,16 +109,41 @@ int main()
 
 		if (cmd == 1)
 		{
-			v.push_back(new Rect);
+			pcmd = new AddRectCommand(v);
+
+			if (pcmd->can_execute())
+			{
+				pcmd->execute();        // 실행후
+
+				undo_stack.push(pcmd);	// undo 를 위해서 스택에 보관
+			}
 		}
+
 		else if (cmd == 2)
 		{
-			v.push_back(new Circle);
+			pcmd = new AddCircleCommand(v);
+
+			if (pcmd->can_execute())
+			{
+				pcmd->execute();        
+
+				undo_stack.push(pcmd);	
+			}
 		}
 		else if (cmd == 9)
 		{
-			for (auto s : v)
-				s->draw();
+			pcmd = new AddDrawCommand(v);
+
+			if (pcmd->can_execute())
+			{
+				pcmd->execute();        
+
+				undo_stack.push(pcmd);	
+			}
+			else
+			{
+				std::cout << "현재상태에서는 실행할수 없는 명령(disable menu)\n";
+			}
 		}
 	}
 }
