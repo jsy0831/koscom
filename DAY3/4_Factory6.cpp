@@ -28,4 +28,5 @@ class Rect
 
 
 
-
+// RUST 언어의 객체 생성
+//String s = String::new(); // new() 가 static 멤버 함수 입니다.
