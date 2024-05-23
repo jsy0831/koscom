@@ -38,14 +38,17 @@ template<typename T> std::mutex Singleton<T>::mtx;
 class Mouse : public Singleton< Mouse >
 {
 };
-
 int main()
 {
 	Mouse& c1 = Mouse::get_instance();
 	Mouse& c2 = Mouse::get_instance();
-
 }
 
+// github.com/aosp-mirror   에 접속해 보세요. "안드로이드 OS" 소스 코드 입니다.
+
+// system platform core  리포지토리 선택후
+
+// libutils/include/utils  에서 Singleton.h 파일 열어 보세요
 
 
 
