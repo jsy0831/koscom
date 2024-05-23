@@ -5,6 +5,12 @@
 #include <map>
 #include "Helper.h"
 
+// 아래 코드와 같이 자주 사용되는 객체를 미리 만들어서(견본품, prototype)
+// 공장에 등록해 놓고
+// 복사(clone 가상함수) 를 통해서 객체를 만드는 패턴을 
+// "prototype 패턴" 이라고 합니다.
+
+
 class Shape
 {
 public:
