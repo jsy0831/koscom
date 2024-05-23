@@ -1,36 +1,40 @@
 #include <iostream>
 #include <mutex>    
 
-class Cursor
+class Singleton
 {
 private:
-	Cursor() {}
+	Singleton() {}
 
-	Cursor(const Cursor&) = delete;
-	Cursor& operator=(const Cursor&) = delete;
+	Singleton(const Singleton&) = delete;
+	Singleton& operator=(const Singletonursor&) = delete;
 
-	static Cursor* sinstance;
+	static Singleton* sinstance;
 	static std::mutex mtx;
 public:
 
-	static Cursor& get_instance()
+	static Singleton& get_instance()
 	{
 		std::lock_guard<std::mutex> g(mtx); 
 
 		if (sinstance == nullptr)
-			sinstance = new Cursor;
+			sinstance = new Singleton;
 
 		return *sinstance;
 	}
 };
+Singleton* Singleton::sinstance = nullptr;
+std::mutex Singleton::mtx;
 
-Cursor* Cursor::sinstance = nullptr;
-std::mutex Cursor::mtx;
+// Mouse 도 힙에 만드는 싱글톤 패턴을 사용하고 싶다.
+class Mouse : public Singleton
+{
+};
 
 int main()
 {
-	Cursor& c1 = Cursor::get_instance();
-	Cursor& c2 = Cursor::get_instance();
+	Mouse& c1 = Mouse::get_instance();
+	Mouse& c2 = Mouse::get_instance();
 
 }
 
